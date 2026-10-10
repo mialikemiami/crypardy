@@ -13,12 +13,15 @@ export const SOUND_FILES = {
   newround: 'newround.wav',
   final: 'final.wav',
   tie: 'tie.wav',
+  openbuzz: 'openbuzz.wav',
 };
 
 export function soundForEvent(ev) {
   switch (ev?.type) {
     case 'clue-opened':
       return { play: ev.wager ? 'trip' : 'select' };
+    case 'armed':
+      return ev.rebound ? null : { play: 'openbuzz' };
     case 'buzz-winner':
       return { play: 'buzz' };
     case 'wager-locked':

@@ -6,6 +6,8 @@ import { SOUND_FILES, soundForEvent } from '../public/js/sounds.js';
 test('each sound plays at its own moment', () => {
   assert.deepEqual(soundForEvent({ type: 'clue-opened', wager: true }), { play: 'trip' }, "DON'T TRIP! picked");
   assert.deepEqual(soundForEvent({ type: 'clue-opened', wager: false }), { play: 'select' }, 'regular clue picked');
+  assert.deepEqual(soundForEvent({ type: 'armed' }), { play: 'openbuzz' }, 'the host opens the buzzers');
+  assert.equal(soundForEvent({ type: 'armed', rebound: true }), null, 'reopening after a wrong answer keeps the wrong sound playing');
   assert.deepEqual(soundForEvent({ type: 'buzz-winner', name: 'Theo', ms: 180 }), { play: 'buzz' }, 'a player buzzes in');
   assert.deepEqual(soundForEvent({ type: 'wager-locked', amount: 500 }), { play: 'wager' }, "DON'T TRIP! wager locks in");
   assert.deepEqual(soundForEvent({ type: 'final-wager-locked', name: 'Mara' }), { play: 'wager' }, 'a Final Round wager locks in');
