@@ -51,3 +51,7 @@ The host controls the game, players play on they phones, and the streamer shares
 | Clue | [dingaling](https://freesound.org/people/morrisjm/sounds/268756/) by morrisjm ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)) |
 | Next | [Stick-Swoosh Whoosh](https://freesound.org/people/Hitrison/sounds/216675/) by Hitrison ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)) |
 | Undo | [Clean Record Scratch](https://freesound.org/people/kwahmah_02/sounds/269476/) by kwahmah_02 ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)) |
+| Game Start | [Power Up 2 SFX](https://freesound.org/people/Eschwabe3/sounds/460132/) by Eschwabe3 ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)) |
+| New Round | [8-bit pitch descalation effect](https://freesound.org/people/AceOfSpadesProduc100/sounds/333782/) by AceOfSpadesProduc100 ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)) |
+| Final Round | [Level win.wav](https://freesound.org/people/Tuudurt/sounds/258142/) by Tuudurt ([CC0](https://creativecommons.org/publicdomain/zero/1.0/)) |
+| Tiebreaker | [j1game_over_mono.wav](https://freesound.org/people/jivatma07/sounds/173859/) by jivatma07 ([CC0](https://creativecommons.org/publicdomain/zero/1.0/)) |

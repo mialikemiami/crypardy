@@ -19,6 +19,10 @@ test('each sound plays at its own moment', () => {
   assert.deepEqual(soundForEvent({ type: 'final-time-up' }), { stop: true });
   assert.deepEqual(soundForEvent({ type: 'undo', phase: 'board' }), { stop: true, play: 'undo' }, 'undo stops think music and stings, then plays the undo sound');
   assert.deepEqual(soundForEvent({ type: 'next' }), { play: 'next' }, 'the host moves on from a clue');
+  assert.deepEqual(soundForEvent({ type: 'game-start', names: ['Mara'] }), { play: 'gamestart' }, 'the game starts');
+  assert.deepEqual(soundForEvent({ type: 'round', name: 'Round 2' }), { play: 'newround' }, 'a new round starts');
+  assert.deepEqual(soundForEvent({ type: 'final-category', category: 'Movie Trailers' }), { play: 'final' }, 'the Final Round starts');
+  assert.deepEqual(soundForEvent({ type: 'tiebreaker', names: ['Mara', 'Theo'] }), { play: 'tie' }, 'a tiebreaker starts');
   assert.deepEqual(soundForEvent({ type: 'revealed', outcome: 'skipped', wager: true }), { stop: true }, "a skipped DON'T TRIP! goes quiet");
   assert.equal(soundForEvent({ type: 'revealed', outcome: 'correct' }), null, 'a reveal never cuts off the Correct sound');
 });

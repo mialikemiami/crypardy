@@ -9,6 +9,10 @@ export const SOUND_FILES = {
   wager: 'wager.mp3',
   next: 'next.flac',
   undo: 'undo.flac',
+  gamestart: 'gamestart.wav',
+  newround: 'newround.wav',
+  final: 'final.wav',
+  tie: 'tie.wav',
 };
 
 export function soundForEvent(ev) {
@@ -34,6 +38,14 @@ export function soundForEvent(ev) {
       return { stop: true, play: 'undo' };
     case 'next':
       return { play: 'next' };
+    case 'game-start':
+      return { play: 'gamestart' };
+    case 'round':
+      return { play: 'newround' };
+    case 'final-category':
+      return { play: 'final' };
+    case 'tiebreaker':
+      return { play: 'tie' };
     case 'revealed':
       return ev.outcome === 'skipped' ? { stop: true } : null;
     default:
