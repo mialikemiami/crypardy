@@ -801,7 +801,7 @@ function clueCard() {
   else if (c.answering && c.overtime) status = `Time’s up: rule on ${esc(seatName(state, c.answering))}’s answer`;
   else if (c.answering) status = `${esc(seatName(state, c.answering))} is answering`;
   else if (c.armed) status = c.buzzes.length ? 'Buzz received' : 'Buzzers open';
-  else status = 'Read the clue, then open the buzzers';
+  else status = 'Read the clue then open the buzzers';
   const total = c.timer === 'buzz' ? SETTINGS.buzzWindowMs : c.wager ? SETTINGS.wagerAnswerMs : SETTINGS.answerMs;
   const timer =
     c.timer && !c.revealed
@@ -880,7 +880,7 @@ function finalCard() {
   return `<section class="card main-card">
     <div class="label">Final Round · ${esc(fin.category)}</div>
     <h2 class="h big-name">Reveals</h2>
-    <p>Revealed from the lowest score to the highest. Reveal a response, then judge it.</p>
+    <p>Revealed from the lowest score to the highest. Reveal a response then judge it.</p>
     <ul class="list">${items}</ul>
     ${mediaBlock(fin.media, 'final')}
     ${responseBlock(fin)}
@@ -1018,7 +1018,7 @@ function discordCard() {
         ${step(1, 'Post the join message in the Stage chat or send it directly to players.', script('join'))}
         ${step(
           2,
-          'Seat players here, then bring each one up to speak: right-click their name in the Stage and choose <strong>Invite to Speak</strong>, or accept their raised hand. Bring the streamer up too; only speakers can share their screen.',
+          'Seat players here then bring each one up to speak: right-click their name in the Stage and choose <strong>Invite to Speak</strong>, or accept their raised hand. Bring the streamer up too; only speakers can share their screen.',
           `${seated.length ? `<p class="hint">To invite: ${names(seated)}</p>` : ''}${script('players')}`,
         )}
         ${step(3, `Turn on slowmode: ${slowmode} → <strong>30s</strong> → <strong>Save Changes</strong>. Then post the chat notice.`, script('chat'))}

@@ -414,14 +414,14 @@ function wagerView(seat) {
   const inputId = `wager-${clueKey()}`;
   const sent = wagerSentFor === clueKey();
   return `${clueHead(c)}<h2 class="h big">DON’T TRIP!</h2>
-    <p>You found a DON’T TRIP! Only you answer this. Wager from ${fmt(min)} to ${fmt(max)}, then say your response out loud when the clue appears.</p>
+    <p>You found a DON’T TRIP! Only you answer this. Wager from ${fmt(min)} to ${fmt(max)} then say your response out loud when the clue appears.</p>
     <div class="card" style="display:flex;flex-direction:column;gap:14px">
       <div class="field">
         <label for="${inputId}">Your Wager</label>
         <input id="${inputId}" type="number" inputmode="numeric" min="${min}" max="${max}" step="1">
       </div>
       ${formError ? `<div class="error" role="alert">${esc(formError)}</div>` : ''}
-      <button class="btn wide" data-act="send-wager" data-input="${inputId}">${sent ? 'Wager sent · send again' : 'Lock in wager'}</button>
+      <button class="btn wide" data-act="send-wager" data-input="${inputId}">${sent ? 'Wager Sent · send again' : 'Lock in wager'}</button>
     </div>`;
 }
 
