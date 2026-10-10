@@ -1,0 +1,16 @@
+{
+  "name": "crypardy",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Issa lil quiz show game for Vincecord: host, player, and stream views.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/engine.test.mjs tests/token.test.mjs tests/discord.test.mjs tests/sounds.test.mjs tests/create.test.mjs tests/media.test.mjs"
+  },
+  "dependencies": {
+    "ably": "^2.29.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

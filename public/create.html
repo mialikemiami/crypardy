@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypardy · Write a game</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 24px 16px 64px; display: flex; flex-direction: column; gap: 22px; }
+  .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+  .brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .layout { display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start; }
+  .editor { flex: 3 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+  .check { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  @media (min-width: 1000px) { .check { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; } }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tab { min-height: 44px; padding: 0 14px; border: 2px solid var(--black); border-radius: 10px; background: var(--cream); color: var(--black); font: 700 15px var(--body); cursor: pointer; }
+  .tab[aria-selected='true'] { background: var(--pink); color: var(--white); }
+  .tab.add { border-style: dashed; }
+  .tab:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .round-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+  .round-head .h { font-size: 30px; }
+  .names { display: flex; flex-direction: column; gap: 12px; }
+  .name-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 14px; }
+  @media (max-width: 640px) { .name-grid { grid-template-columns: minmax(0, 1fr); } }
+  .name-slot { display: flex; align-items: center; gap: 8px; }
+  .name-num { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+  .name-slot input { font-weight: 700; }
+  .cat-panel { display: flex; flex-direction: column; gap: 16px; }
+  .cat-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  @media (max-width: 640px) { .cat-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .cat-tab { min-height: 46px; padding: 8px 12px; border: 2px solid var(--black); border-radius: 10px; background: var(--cream); color: var(--black); font: 700 14px/1.2 var(--body); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; min-width: 0; }
+  .cat-tab-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cat-tab-count { flex: none; font-size: 12px; font-weight: 400; }
+  .cat-tab[aria-selected='true'] { background: var(--blue); color: var(--white); }
+  .cat-tab:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+  .cat-head { font-size: 30px; overflow-wrap: anywhere; }
+  .clue-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .clue-row { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; grid-template-areas: 'value fields trip'; align-items: start; gap: 12px; padding: 14px 0; border-top: 1.5px dashed var(--black); }
+  .clue-row:first-child { border-top: 0; padding-top: 0; }
+  .clue-row .value-chip { grid-area: value; text-align: center; font-size: 15px; padding: 8px 0; }
+  .clue-fields { grid-area: fields; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .clue-row .trip-toggle { grid-area: trip; }
+  @media (max-width: 640px) {
+    .clue-row { grid-template-columns: 76px 1fr; grid-template-areas: 'value trip' 'fields fields'; }
+    .clue-row .trip-toggle { justify-self: end; }
+  }
+  .trip-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 10px; border: 2px solid var(--black); border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; user-select: none; white-space: nowrap; }
+  .trip-toggle input { width: 18px; height: 18px; margin: 0; accent-color: var(--pink); }
+  .trip-toggle:has(input:checked) { background: var(--black); color: var(--pink); }
+  textarea, .editor input[type='text'] { width: 100%; min-width: 0; padding: 9px 12px; border: 2px solid var(--black); border-radius: 10px; background: var(--white); color: var(--black); font: 16px/1.4 var(--body); }
+  .editor input[type='text'] { height: 44px; }
+  textarea { resize: vertical; min-height: 64px; }
+  textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .note > summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--blue); min-height: 28px; display: inline-flex; align-items: center; list-style: none; }
+  .note > summary::-webkit-details-marker { display: none; }
+  .note > summary::before { content: '+ '; white-space: pre; }
+  .note[open] > summary::before { content: '− '; }
+  .note[open] > summary { margin-bottom: 6px; }
+  .single { display: flex; flex-direction: column; gap: 14px; }
+  .single .h { font-size: 26px; }
+  .singles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 18px; }
+  .stat { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1.5px dashed var(--black); font-size: 14px; }
+  .stat:last-child { border-bottom: 0; }
+  .issues { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; display: flex; flex-direction: column; gap: 4px; }
+  .ok { font-weight: 700; }
+  .mini { display: grid; gap: 3px; }
+  .mini i { height: 14px; border-radius: 3px; border: 1.5px dashed var(--black); }
+  .mini i.on { background: var(--blue); border: 0; }
+  .mini i.is-trip { background: var(--pink); border: 0; }
+  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 20; }
+  .media-preview { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .media-preview img, .media-preview video, .media-preview iframe { display: block; width: 100%; max-width: 420px; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; background: var(--black); object-fit: contain; }
+  .media-preview audio { width: 100%; max-width: 420px; }
+  .media-bad { color: var(--pink); font-weight: 700; }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<input id="csv-file" type="file" accept=".csv,text/csv" class="sr-only" tabindex="-1" aria-hidden="true">
+<script type="module" src="js/create.js"></script>
+</body>
+</html>

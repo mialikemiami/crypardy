@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypardy · Stream</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  #viewport { position: fixed; inset: 0; overflow: hidden; }
+  #stage { position: absolute; top: 0; left: 0; width: 1280px; height: 720px; transform-origin: 0 0; background: var(--cream); padding: 28px 32px; display: flex; flex-direction: column; gap: 18px; overflow: hidden; }
+  .s-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 42px; }
+  .s-top .info { display: flex; align-items: center; gap: 12px; font-family: var(--head); font-size: 26px; letter-spacing: 0.08em; color: var(--pink); text-transform: uppercase; }
+  .s-top .info .value-chip { font-family: var(--head); font-size: 28px; line-height: 1.1; padding: 4px 12px; border-radius: 8px; letter-spacing: 0.02em; }
+  .grid { display: grid; gap: 8px; }
+  .g-cat { height: 72px; padding: 0 10px; border: 2px solid var(--black); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--head); font-size: 21px; line-height: 1.05; letter-spacing: 0.04em; text-transform: uppercase; color: var(--pink); overflow: hidden; }
+  .g-val { height: 62px; padding-top: 4px; border-radius: 10px; background: var(--blue); display: flex; align-items: center; justify-content: center; font-family: var(--head); font-size: 44px; letter-spacing: 0.02em; color: var(--white); }
+  .g-val.used { background: transparent; border: 2px dashed var(--black); }
+  .g-val.live { background: var(--pink); }
+  .panel { flex: 1; min-height: 0; padding: 36px 80px; border: 3px solid var(--black); border-radius: 18px; box-shadow: 6px 6px 0 var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; overflow: hidden; }
+  .panel .clue-text { margin: 0; max-width: 1040px; font-family: var(--head); line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; color: var(--black); }
+  .panel .big { font-family: var(--head); color: var(--pink); line-height: 1; text-transform: uppercase; letter-spacing: 0.03em; }
+  .panel .sub { font-size: 26px; font-weight: 700; }
+  .answer { padding: 14px 22px; border: 2px solid var(--black); border-radius: 12px; background: var(--blue); color: var(--white); font-size: 28px; font-weight: 700; max-width: 1000px; }
+  .timer-row { display: flex; align-items: center; gap: 16px; min-height: 22px; }
+  .timer-row .who { font-family: var(--head); font-size: 22px; letter-spacing: 0.1em; color: var(--pink); text-transform: uppercase; white-space: nowrap; }
+  .timer-row .bar { flex: 1; height: 14px; }
+  .timer-row .secs { font-size: 16px; font-weight: 700; min-width: 48px; text-align: right; }
+  .podiums { display: flex; gap: 14px; margin-top: auto; }
+  .podium { flex: 1; min-width: 0; height: 112px; padding: 14px 20px; border: 2px solid var(--black); border-radius: 14px; box-shadow: 4px 4px 0 var(--black); display: flex; flex-direction: column; justify-content: space-between; color: var(--pink); }
+  .podium.control { border: 3px solid var(--pink); }
+  .podium.lit { background: var(--pink); color: var(--white); }
+  .podium.out { border-style: dashed; box-shadow: none; }
+  .podium .name-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .podium .name { font-family: var(--head); font-size: 28px; line-height: 1; letter-spacing: 0.05em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .podium .pts { font-family: var(--head); font-size: 44px; line-height: 1; }
+  .podium .note { font-size: 14px; font-weight: 700; color: var(--black); white-space: nowrap; }
+  .podium.lit .note { color: var(--white); }
+  .reveal-cards { display: grid; gap: 14px; width: 100%; }
+  .reveal-card { padding: 16px 18px; border: 2px solid var(--black); border-radius: 14px; text-align: left; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .reveal-card.current { border: 3px solid var(--pink); }
+  .reveal-card .name { font-family: var(--head); font-size: 26px; color: var(--pink); text-transform: uppercase; letter-spacing: 0.05em; }
+  .reveal-card .resp { font-size: 24px; font-weight: 700; overflow-wrap: anywhere; }
+  .reveal-card .meta { font-size: 18px; font-weight: 700; }
+  .join { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; background: var(--cream); }
+  #trip-layer[hidden] { display: none; }
+  .panel.with-media { flex-direction: row; align-items: center; justify-content: flex-start; gap: 36px; padding: 28px 36px; text-align: left; }
+  .panel.with-media .media-slot { flex: 0 0 600px; width: 600px; height: 338px; aspect-ratio: auto; }
+  .panel.with-media .clue-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+  .panel.with-media .answer { font-size: 24px; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"></div></div>
+<div id="join-layer"></div>
+<div id="trip-layer" hidden></div>
+<script type="module" src="js/stream.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crypardy · Play</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  body { min-height: 100vh; }
+  .phone { max-width: 480px; min-height: 100vh; margin: 0 auto; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 20px 12px; }
+  .me { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; }
+  .me .score { font-size: 18px; font-weight: 700; }
+  .body { flex: 1; padding: 6px 20px 20px; display: flex; flex-direction: column; gap: 18px; }
+  .foot { display: grid; gap: 8px; padding: 14px 20px 24px; border-top: 2px solid var(--black); }
+  .foot div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .foot .name { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .foot .pts { font-size: 16px; font-weight: 700; }
+  .cats { display: flex; flex-direction: column; gap: 14px; }
+  .cat-row { display: flex; flex-direction: column; gap: 6px; }
+  .cat-name { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .vals { display: grid; gap: 6px; }
+  .val { height: 46px; border: 0; border-radius: 10px; background: var(--blue); color: var(--white); font: 700 15px var(--body); cursor: pointer; }
+  .val:disabled { cursor: default; }
+  .val.used { background: transparent; border: 1.5px dashed var(--black); }
+  .val:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+  .clue { display: flex; flex-direction: column; gap: 12px; }
+  .clue-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .clue-text { font-size: 21px; line-height: 1.4; }
+  .buzz-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 10px 0; text-align: center; }
+  .warn-slot { display: contents; }
+  .armed-line { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; }
+  .buzzer { width: 232px; height: 232px; border: 3px solid var(--black); border-radius: 50%; background: var(--pink); color: var(--white); font-family: var(--head); font-size: 60px; letter-spacing: 0.06em; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  .buzzer.armed { box-shadow: 0 0 0 10px var(--cream), 0 0 0 14px var(--black); }
+  .buzzer.waiting { background: var(--cream); color: var(--pink); border-color: var(--pink); border-style: dashed; }
+  .buzzer.down, .buzzer.pressed { background: var(--blue); color: var(--white); border-color: var(--black); border-style: solid; }
+  .buzzer.in { background: var(--pink); color: var(--white); display: grid; place-items: center; font-size: 44px; cursor: default; }
+  .buzzer:disabled { background: var(--cream); color: var(--black); border-style: dashed; cursor: default; }
+  .buzzer:active:not(:disabled) { transform: scale(0.97); }
+  .buzzer:focus-visible { outline: 3px solid var(--pink); outline-offset: 18px; }
+  .timer { width: 220px; }
+  .timer .bar { height: 10px; }
+  .big { font-size: 44px; }
+  .response-line { font-size: 22px; font-weight: 700; overflow-wrap: anywhere; }
+  .quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .reveals { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .reveals li { padding: 12px 14px; border: 2px solid var(--black); border-radius: 12px; display: flex; flex-direction: column; gap: 4px; overflow-wrap: anywhere; }
+  .winner { font-family: var(--head); font-size: 52px; color: var(--pink); line-height: 1; overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script type="module" src="js/play.js"></script>
+</body>
+</html>

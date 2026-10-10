@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypardy</title>
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  .home { width: min(520px, 100%); display: flex; flex-direction: column; gap: 18px; }
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .credits { font-size: 13px; line-height: 1.5; }
+  .credits > summary { cursor: pointer; font-weight: 700; color: var(--blue); min-height: 28px; display: inline-flex; align-items: center; list-style: none; }
+  .credits > summary::-webkit-details-marker { display: none; }
+  .credits > summary::before { content: '+ '; white-space: pre; }
+  .credits[open] > summary::before { content: '− '; }
+  .credits ul { margin: 6px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+  .credits a { color: var(--blue); overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main class="centered">
+  <div class="card home">
+    <div class="wordmark" style="font-size:52px">CRYPARDY<span>!</span></div>
+    <p>A quiz show for Vincecord! Want to be a part of the fun? Join the Vince Staples Discord Server to tune in for Crypardy Game Nights.</p>
+    <div class="choices">
+      <a class="btn" id="play" href="play">PLAYERS</a>
+      <a class="btn" id="host" href="host">HOST</a>
+      <a class="btn" id="stream" href="stream">STREAMER</a>
+      <a class="btn pink" id="create" href="create">CREATOR</a>
+    </div>
+    <details class="credits">
+      <summary>Sound Credits</summary>
+      <ul>
+        <li>Correct Answer: <a href="https://freesound.org/people/JapanYoshiTheGamer/sounds/361263/" target="_blank" rel="noopener">8-bit Correct Answer</a> by JapanYoshiTheGamer (<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>)</li>
+        <li>Incorrect Answer: <a href="https://freesound.org/people/JapanYoshiTheGamer/sounds/361260/" target="_blank" rel="noopener">8-bit Wrong Sound</a> by JapanYoshiTheGamer (<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>)</li>
+        <li>Wager: <a href="https://freesound.org/people/Cloud-10/sounds/647977/" target="_blank" rel="noopener">8-Bit Coin Or Power Up FX For Retro Video Games</a> by Cloud-10 (<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>)</li>
+        <li>Thinking Music: <a href="https://freesound.org/people/BenFranklyn/sounds/789077/" target="_blank" rel="noopener">Jeopardy</a> by BenFranklyn (<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>)</li>
+        <li>Buzzer: <a href="https://freesound.org/people/kwahmah_02/sounds/244932/" target="_blank" rel="noopener">short buzzer.wav</a> by kwahmah_02 (<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</li>
+        <li>Time’s Up: <a href="https://freesound.org/people/themusicalnomad/sounds/253886/" target="_blank" rel="noopener">negative_beeps.wav</a> by themusicalnomad (<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>)</li>
+        <li>DON’T TRIP!: <a href="https://freesound.org/people/jwheeler91/sounds/442280/" target="_blank" rel="noopener">DoorBell Shortened</a> by jwheeler91 (<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">CC0</a>)</li>
+        <li>Clue: <a href="https://freesound.org/people/morrisjm/sounds/268756/" target="_blank" rel="noopener">dingaling</a> by morrisjm (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>)</li>
+        <li>Next: <a href="https://freesound.org/people/Hitrison/sounds/216675/" target="_blank" rel="noopener">Stick-Swoosh Whoosh</a> by Hitrison (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>)</li>
+        <li>Undo: <a href="https://freesound.org/people/kwahmah_02/sounds/269476/" target="_blank" rel="noopener">Clean Record Scratch</a> by kwahmah_02 (<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</li>
+      </ul>
+    </details>
+  </div>
+</main>
+</body>
+</html>
