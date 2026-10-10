@@ -548,7 +548,7 @@ function topBar() {
   return `<header class="top">
     <div class="brand">
       <div class="wordmark" style="font-size:34px">CRYPARDY<span>!</span></div>
-      <strong>Host view</strong>
+      <strong>Host View</strong>
       <span>${esc(where)}</span>
     </div>
     <div class="chips">
